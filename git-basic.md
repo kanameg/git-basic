@@ -175,3 +175,54 @@ $ git branch -a
 ```
 `*`がついてるブランチが現在作業中のブランチです。また`-a`オプションをつけることにより、リモート上のレポジトリも確認することができます。
 
+### ブランチの作成
+`git branch <ブランチ名>`でブランチを作成します。
+
+新しい機能の開発を開始したりする場合にブランチを作成します。
+**ブランチを作成する前には必ず現在のブランチが何かを確認しましょう！**
+変更を加えた後に、想定しないブランチから分岐していることに気づくと悲しいことになります。
+
+```
+$ git branch -a
+* develop   <--- 分岐元を確認！
+  master
+  remotes/origin/develop
+  remotes/origin/master
+$ git branch feature-0001
+$ git branch -a
+* develop
+  feature-0001  <--- ブランチが作成されていることを確認
+  master
+  remotes/origin/develop
+  remotes/origin/master
+```
+
+<!-- #### 追跡ブランチの確認
+ブランチが想定通りの正しいブランチから分岐されているか、追跡ブランチ名を確認します。`-vv`オプションで追跡ブランチ名を確認できます。`w`ではなく`vv`なのに注意！
+
+```
+$ git branch -vv
+git branch -vv
+* develop      643662b [origin/develop] developブランチで変更
+  feature-0001 6935000 [M] modified README.md file
+  master       6935000 [origin/master] [M] modified README.md file
+``` -->
+
+### ブランチの変更
+コマンドでブランチを作成した場合、現在のブランチは作成されたブランチに変更されず作成元のブランチのままです。`git checkout`コマンドでブランチの変更を行います。
+
+Visual Studio Codeのgit拡張はブランチを作成すると自動的にブランチを変更したりします。常に自分がどのブランチで作業しているか確認しながら変更を加えていきましょう。
+
+```
+$ git checkout feature-0001
+Switched to branch 'feature-0001'
+```
+```
+$ git branch -a
+  develop
+* feature-0001   <--- ブランチが切替わっていることを確認
+  master
+  remotes/origin/develop
+  remotes/origin/master
+```
+
