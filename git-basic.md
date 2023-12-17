@@ -32,3 +32,131 @@
 
 
 ## 基本的なコマンド
+
+### 初期設定
+gitを使い始める時の基本的な初期設定、
+
+#### ユーザ名とメールアドレス
+コミットをするためには、Gitにユーザ名とメールアドレスを登録する必要がります。基本的にはglobalに登録しておけば、全レポジトリにこのユーザー名とメールアドレスが適用されコミット時のログにこのユーザー名とメールアドレスが記録されます。
+```
+$ git config --global user.name "user_firstname user_lastname"
+$ git config --global user.email "user_name@domain.om"
+```
+
+#### 初期ブランチ名
+ローカルレポジトリを作成した時にディフォルトで初期作成されるブランチ名を登録します。
+ディフォルトでは`master`が指定されますが、ローカルレポジトリを作成する時にごちゃごちゃ言われるので設定しておいても良いです。
+```
+$ git config --global init.defaultBranch main
+```
+
+### ローカルレポジトリの作成
+ここでは、`example_project`がレポジトリでここで作業が行われると想定しています。
+
+```
+$ mkdir example_project
+$ cd example_project
+$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint:   git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint:   git branch -m <name>
+Initialized empty Git repository in ~/Git/example_project/.git/
+```
+
+### ステータスの確認
+ローカルレポジトリの状態を確認します。不要なファイルを登録したり間違ったブランチで作業しないように頻繁にレポジトリの状態を確認しましょう。
+
+```
+$ git status
+On branch master
+nothing to commit, working tree clean
+```
+何も変更がない状態では、このように現在のブランチ名と、ワーキングツリーに変更がないことが表示されます。
+
+```
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+ワークツリーに変更がある場合にはこのように変更があるファイルが表示されます。
+
+### ステージング
+変更のあるファイルをワーキングツリーからステージングエリアに登録します。
+
+```
+$ git add README.md
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   README.md
+```
+`git add`コマンドで登録するファイルを指定してステージング環境に登録します。`git status`で確認すると、ステージング環境に登録されステージング環境に登録されてレポジトリの差分が表示されます。
+
+### コミット
+ステージングエリアに登録された変更をローカルレポジトリに追加します。
+
+```
+$ git commit -m "[M] modified README.md file"
+[master f3bdd0e] modified README.md file
+ 1 file changed, 1 insertion(+)
+```
+コミットは`git commit`コマンドで行います。コミット時のlogメッセージは`-m`で引数で与えます。何の変更を加えたかわかりやすいメッセージを入れましょう。
+
+### コミットの確認
+変更の履歴を確認します。コミット後はきちんと変更が登録されているか意図した変更になっているか必ず確認しましょう。
+
+#### ログの確認
+コミットのログを確認します。いっぱい出ると見にくいのでオプションをつけるのもありです。
+```
+$ git log
+commit 6935000f7942a0943171b90ad9f3fce5aa35a675 (HEAD -> master)
+Author: kanameg <kaname.g@gmail.com>
+Date:   Sun Dec 17 16:23:06 2023 +0900
+
+    [M] modified README.md file
+```
+
+一行で表示したり、コミット番号も短く表示できます。
+```
+$ git log --oneline
+6935000 (HEAD -> master) [M] modified README.md file
+1992e0c first commit
+```
+
+コミットされた日付や変更メッセージが正しいかを確認します。変更が正しくない場合はコミットを取り消したり修正を行います。
+**リモートレポジトリに登録後は変更できなくなってしまいます。** ローカルレポジトリの時点で正しい変更が行われているかきちんと確認しましょう。
+
+#### 詳細の確認
+
+```
+$ git show 6935000
+commit 6935000f7942a0943171b90ad9f3fce5aa35a675 (HEAD -> master)
+Author: kanameg <kaname.g@gmail.com>
+Date:   Sun Dec 17 16:23:06 2023 +0900
+
+    [M] modified README.md file
+
+diff --git a/README.md b/README.md
+index 8339808..67242f0 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,3 @@
+ # Git練習用プロジェクト
++
++変更を追加
+```
+変更の詳細内容を表示して変更内容が正しいか確認します。想定通りの変更が追加されているか確認します。
+
