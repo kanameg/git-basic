@@ -215,13 +215,28 @@ $ git branch -a
   remotes/origin/master
 ```
 
-#### 追跡ブランチの自動切替
+#### ブランチの自動切替
 `-b`オプションをつけるとブランチの切り替えも自動で行ってくれます。
 通常はこっちで良いかもしれません。
 ```
 $ git branch feature-0001 -b 
 Switched to branch 'feature-0001'
 ```
+
+#### ブランチの追跡を設定
+リモートの追跡ブランチを作成するため、`push`してリモートの追跡ブランチを指定します。
+```
+$ git push -u origin feature-0001
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'feature-0001' on GitHub by visiting:
+...
+ * [new branch]      feature-0001 -> feature-0001
+branch 'feature-0001' set up to track 'origin/feature-0001'.
+```
+
+今後は`push`をするとリモートの`origin/feature-0001`にプッシュされます。
+
 
 ### ブランチへの変更作業
 ブランチでの作業は通常の作業同様に、ワークツリーでの変更、ステージングエリアへの追加、コミットの順番で、ローカルレポジトリで上のブランチを変更していきます。機能の動作確認を行い、機能追加が完了したら元のブランチへの適用を行います。
