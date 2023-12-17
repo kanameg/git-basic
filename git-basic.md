@@ -197,17 +197,6 @@ $ git branch -a
   remotes/origin/master
 ```
 
-<!-- #### 追跡ブランチの確認
-ブランチが想定通りの正しいブランチから分岐されているか、追跡ブランチ名を確認します。`-vv`オプションで追跡ブランチ名を確認できます。`w`ではなく`vv`なのに注意！
-
-```
-$ git branch -vv
-git branch -vv
-* develop      643662b [origin/develop] developブランチで変更
-  feature-0001 6935000 [M] modified README.md file
-  master       6935000 [origin/master] [M] modified README.md file
-``` -->
-
 ### ブランチの変更
 コマンドでブランチを作成した場合、現在のブランチは作成されたブランチに変更されず作成元のブランチのままです。`git checkout`コマンドでブランチの変更を行います。（違うブランチに変更を加えたら目も当てられないです）
 
@@ -224,6 +213,14 @@ $ git branch -a
   master
   remotes/origin/develop
   remotes/origin/master
+```
+
+#### 追跡ブランチの自動切替
+`-b`オプションをつけるとブランチの切り替えも自動で行ってくれます。
+通常はこっちで良いかもしれません。
+```
+$ git branch feature-0001 -b 
+Switched to branch 'feature-0001'
 ```
 
 ### ブランチへの変更作業
