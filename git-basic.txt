@@ -261,7 +261,7 @@ $ git push -u origin <branch name>
 
 #### リモートブランチの削除
 ```
-$ git push origin <branch name>
+$ git push --delete origin <branch name>
 ```
 
 #### ローカルブランチの削除
