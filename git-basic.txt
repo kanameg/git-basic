@@ -245,6 +245,28 @@ branch 'feature-0001' set up to track 'origin/feature-0001'.
 
 
 
+### ブランチ操作まとめ
+
+新規ブランチの作成
+```
+$ git checkout -b topic-001
+```
+
+追跡ブランチの作成
+```
+$ git push -u origin topic-001
+```
+
+ローカルブランチの削除
+```
+$ git branch -d topic-001
+```
+
+リモートブランチの削除
+```
+$ git push origin topic-001
+```
+
 ---
 
 
